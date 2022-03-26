@@ -31,6 +31,7 @@ html {
 	color: #9fc5e8;
 	text-align: right;
 	font-size: 10vw;
+	width: 100%;
 }
 
 #sub2 {
@@ -42,20 +43,26 @@ html {
 	background-color: #333333;
 }
 
-#buffer3 {
-	width: 5vw;
+.buffer3 {
+	width: 5%;
 	background-color: #ff9090;
 }
 
 .buffer2 {
-	height: auto;
 }
 
-.sub3 {
+#sub31 {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 50%;
+	width: auto;
+}
+
+#sub32 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: auto;
 }
 
 #time-input {
@@ -77,6 +84,6 @@ html {
 	border-radius: 15px;
 }
 
-#buffer32 {
-	height: 15%;
+.buffer32 {
+	height: 5vh;
 }
