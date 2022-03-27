@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 html {
-	width: 100vw;
-	height: 100vh;
-	overflow: auto;
+	/* Temporary solution. Prevents the scroll bar from appearing. */
+	overflow: hidden;
+
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 }
 
 #main {
-	background-color: #2222aa;
+	background-color: #222222;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -31,12 +31,16 @@ html {
 }
 
 .sub3 {
+	height: 70%;
+}
+
+.sub4 {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 }
 
-#title {
+#timer {
 	font-family: "Audiowide";
 	color: #009688;
 	text-align: center;
@@ -47,13 +51,40 @@ html {
 	font-family: "Audiowide";
 	font-size: 6vw;
 	text-align: center;
-	color: #adadad;
+	color: #adadadff;
 
-	background-color: #303030;
+	background: #303030;
 	border-radius: 15px;
 	width: 45%;
+
+	transition: 500ms;
 }
 
-.buffer32 {
+#button1 {
+	color: #00968811;
+	background: none;
+	border: 8px solid #adadad11;
+}
+
+#button2 {
+	color: #adadad11;
+	background: none;
+	border: 8px solid #adadad11;
+}
+
+.buffer42 {
 	width: 10%;
+}
+
+#button1:hover {
+	transition: 500ms;
+	color: #00ffffff;
+	border-color: #303030ff;
+}
+
+#button2:hover {
+	transition: 500ms;
+	background: #303030ff;
+	border: 8px solid #303030ff;
+	color: #ffffffff;
 }
