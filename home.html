@@ -2,7 +2,7 @@
 <html>
 	<link href="home.css" rel="stylesheet">
 
-	<body id="main">
+	<body id="main" onload="onLoad()">
 
 		<script src="system.js"></script>
 
@@ -22,13 +22,13 @@
 
 				<div class="sub3" id="sub32">
 					<div class="sub4" id="sub4">
-						<div id="time-input" contentEditable="true" onchange="parseTime()">
-							12:00AM
-							
-							<script src="system.js"></script>
-						</div>
+						<input id="time-input" onfocusout="parseTime()" maxlength="7" placeholder="12:00AM">
+						</input>
 						<div class="buffer32"></div>
-						<div id="start-button">Start</div>
+						<div id="start-button" onclick="startAlarm()">Start</div>
+						<div id="hidden-button" hidden onclick="parseTime()">
+							<script src=system.js></script>
+						</div>
 					</div>
 				</div>
 

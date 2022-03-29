@@ -1,43 +1,115 @@
+function onLoad(pageName) {
+
+	if (pageName == "home") {
+		const input = document.getElementById("time-input");
+
+		//Creates an event that clicks the start button on ENTER.
+		input.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) { //13 is ID for Enter key.
+				event.preventDefault(); //Removes default action.
+				document.getElementById("hidden-button").click(); //Clicks button.
+			}
+		});
+	}
+
+	else if (pageName == "clock") {
+
+	}
+}
+
 function parseTime() {
 	"use strict";
 
-	//"decl" stands for "declared".
-	let declTimeString = "";
-	declTimeString = document.getElementById("time-input").innerHTML;
-	let declHour = "12", declMinute = "00";
-	let declMeridiem = true;
+	//Declaration & Initialization
+	let timeString = "12:00AM";
+	let hour = "12", minute = "00";
+	let meridiem = true; //true = AM, false = PM
+	let tempTimeString = "";
+	let hourSwitch = true; //true = hour, false = minute.
+	timeString = document.getElementById("time-input").value;
+	hour = "", minute = "";
 
-	//7 is the expected number of characters from div time-input.
-	for (let i = 0; i < 7; i++) {
+	console.log("Input: " + timeString);
 
-		console.log("On char: " + declTimeString[i]);
+	/*---------------------------- Setting values ----------------------------*/
+	//For every chacter of timeString
+	for (const char of timeString) {
 
-		//For in cases like 5:00AM where there's only 1 hour digit.
-		if (declTimeString[i] == ':') {
-			i = 2;
-			continue;
+		//If char is ':' (colon), set hourSwitch to FALSE.
+		if (char == ':' || hour.length == 2) hourSwitch = false;
+
+		//If char is a number...
+		if (char.match(/^([0-9]{1})$/)){
+
+			//If hourSwitch is TRUE, add char to hour.
+			if (hourSwitch) hour += char;
+
+			//Else, add char to minute.
+			else minute += char;
 		}
 
-		//Hour
-		if (i < 2) declHour += declTimeString[i];
-
-		//Colon; Redundancy.
-		else if (i == 2) continue;
-
-		//Minute
-		else if (i > 5) declMinute += declTimeString[i];
-
-		//Meridiem: AM = true, PM = false.
-		else if (i == 6) {
-			if (declTimeString[i] == 'A') declMeridiem = true;
-			else if (declTimeString[i] == 'P') declMeridiem = false;
+		//Else, if char is letter 'A', set meridiem to TRUE then end the loop.
+		else if (char == 'A') {
+			meridiem = true;
+			break;
 		}
 
-		//Redundancy.
-		else if (i == 7) break;
+		//Else, if char is letter 'P', set meridiem to FALSE then end the loop.
+		else if (char == 'P') {
+			meridiem = false;
+			break;
+		}
 	}
 
-	localStorage.setItem("declHour", declHour);
-	localStorage.setItem("declMinute", declMinute);
-	localStorage.setItem("declMeridiem", declMeridiem);
+
+	/*--------------------------- Filtering inputs ---------------------------*/
+	console.log("Checking inputs...")
+
+	let intHour = parseInt(hour, 10);
+
+	//Adds '0' to the front of hour/minute until there's 2 characters.
+	//Also filters inputs over 24.
+
+	//If hour is only 1 character, add a '0' in front of it.
+	if (hour.length == 1) hour = '0' + hour;
+
+	//Else, if hour is more than 2 characters OR its value is "00"
+	//OR its value is more than 23...
+	else if (hour.length < 2 || hour == "00" || intHour > 23) {
+		hour = "12"; //Set hour to 12.
+		meridiem = true; //Set meridiem to true (AM).
+	}
+
+	//Else, if hour's value is more than 12...
+	else if (intHour > 12) {
+		//13+ hour is 1PM+ by default.
+		intHour -= 12; //Subtract by 12.
+		meridiem = false; //Set meridiem to false (PM).
+		hour = intHour.toString(); //Convert back to STRING.
+		if (hour.length == 1) hour = '0' + hour; //Add 0 if only 1 character.
+	}
+
+	//If minute is more than 2 characters OR its value is more than 59,
+	//set minute to "00".
+	if (minute.length < 2 || parseInt(minute, 10) > 59)  minute = "00";
+
+	//Else, if minute is only 1 character, add a '0' in front of it.
+	else if (minute.length == 1) minute = '0' + minute;
+
+
+	/*----------------------- Saving to local storage ------------------------*/
+	//Allows data to be accessed even after refresh.
+	localStorage.setItem("hour", hour);
+	localStorage.setItem("minute", minute);
+	localStorage.setItem("meridiem", meridiem);
+
+	let ampm = "AM";
+	if (meridiem == true) ampm = "AM"; else ampm = "PM";
+	document.getElementById("time-input").value = hour + ':' + minute + ampm;
+
+	console.log("Saved in local storage...\n\nHour: " + hour + "\nMinute: " + minute + "\nMeridiem: " + meridiem + "\n\nDisplay: " + hour + ":" + minute + ampm);
+}
+
+function startAlarm() {
+	window.location.href = "clock.html";
 }
