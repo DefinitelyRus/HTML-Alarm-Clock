@@ -13,7 +13,36 @@ function onLoad(pageName) {
 	}
 
 	else if (pageName == "clock") {
+		let hour = localStorage.getItem("hour");
+		let minute = localStorage.getItem("minute");
+		let meridiemBool = localStorage.getItem("meridiem");
+		let meridiem = "";
 
+		if (meridiemBool) meridiem = "AM"; else meridiem = "PM";
+
+		document.getElementById("button1").innerHTML = hour + ':' + minute + meridiem;
+
+		updateClock();
+
+		let time;
+		let interval = setInterval(function() {
+			time = updateClock();
+
+			if (time == localStorage.getItem("time")) {
+
+				let clock = document.getElementById("timer");
+				let button1 = document.getElementById("button1");
+				let button2 = document.getElementById("button2");
+
+				clock.style.color = "#00ffffff";
+
+				button1.innerHTML = "Snooze";
+				button1.style.border = "8px solid #303030ff";
+				button1.style.background = "#303030ff"
+
+				window.clearInterval(interval);
+			}
+		}, 1000);
 	}
 }
 
@@ -100,11 +129,34 @@ function parseTime() {
 
 	let ampm = "AM";
 	if (meridiem == true) ampm = "AM"; else ampm = "PM";
-	document.getElementById("time-input").value = hour + ':' + minute + ampm;
 
-	console.log("Saved in local storage...\n\nHour: " + hour + "\nMinute: " + minute + "\nMeridiem: " + meridiem + "\n\nDisplay: " + hour + ":" + minute + ampm);
+	timeString = hour + ':' + minute + ampm;
+	localStorage.setItem("time", timeString);
+
+	document.getElementById("time-input").value = timeString;
+
+	console.log("Saved in local storage...\n\nHour: " + hour + "\nMinute: " + minute + "\nMeridiem: " + meridiem + "\n\nDisplay: " + timeString);
 }
 
 function startAlarm() {
 	window.location.href = "clock.html";
+}
+
+function cancelAlarm() {
+	window.history.back();
+}
+
+function updateClock() {
+	let date = new Date();
+	let hh = date.getHours();
+	let mm = date.getMinutes();
+	let md = "AM";
+
+	if (hh > 12) { hh -= 12; md = "PM"; }
+
+	let time = hh.toString() + ':' + mm.toString() + md;
+
+	document.getElementById("timer").innerHTML = time;
+
+	return time;
 }
