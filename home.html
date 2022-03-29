@@ -2,7 +2,7 @@
 <html>
 	<link href="home.css" rel="stylesheet">
 
-	<body id="main" onload="onLoad()">
+	<body id="main" onload="onLoad('home')">
 
 		<script src="system.js"></script>
 
@@ -14,28 +14,37 @@
 			<div id="sub2">
 				<div class="buffer3" id="b31"></div>
 
+				<!-- Title -->
 				<div class="sub3" id="sub31">
 					<div id="title">Online Alarm Clock</div>
 				</div>
 
 				<div class="buffer3" id="b32"></div>
 
+				<!-- User interactable elements -->
 				<div class="sub3" id="sub32">
+
 					<div class="sub4" id="sub4">
+
+						<!-- Time input -->
 						<input id="time-input" onfocusout="parseTime()" maxlength="7" placeholder="12:00AM">
 						</input>
+
 						<div class="buffer32"></div>
+
+						<!-- Start button -->
 						<div id="start-button" onclick="startAlarm()">Start</div>
+
+						<!-- Hidden button; activates on ENTER. -->
 						<div id="hidden-button" hidden onclick="parseTime()">
 							<script src=system.js></script>
 						</div>
+
 					</div>
 				</div>
 
 				<div class="buffer3" id="b33"></div>
 			</div>
 		</div>
-
 	</body>
-
 </html>
