@@ -7,7 +7,7 @@ function onLoad(pageName) {
 		input.addEventListener("keyup", function(event) {
 			if (event.keyCode === 13) { //13 is ID for Enter key.
 				event.preventDefault(); //Removes default action.
-				document.getElementById("hidden-button").click(); //Clicks button.
+				document.getElementById("hidden-button").click(); //Clicks
 			}
 		});
 	}
@@ -18,8 +18,6 @@ function onLoad(pageName) {
 }
 
 function parseTime() {
-	"use strict";
-
 	//Declaration & Initialization
 	let timeString = "12:00AM";
 	let hour = "12", minute = "00";
@@ -66,9 +64,6 @@ function parseTime() {
 	console.log("Checking inputs...")
 
 	let intHour = parseInt(hour, 10);
-
-	//Adds '0' to the front of hour/minute until there's 2 characters.
-	//Also filters inputs over 24.
 
 	//If hour is only 1 character, add a '0' in front of it.
 	if (hour.length == 1) hour = '0' + hour;
