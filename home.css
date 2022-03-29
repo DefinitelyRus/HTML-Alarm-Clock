@@ -63,7 +63,14 @@ html {
 	font-family: "Audiowide";
 	font-size: 6vw;
 	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: clip;
 	color: #ccccccff;
+
+	width: 96%;
+	background: none;
+
 	border: 8px solid #adadad88;
 	border-radius: 15px;
 
