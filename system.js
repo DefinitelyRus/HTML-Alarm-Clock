@@ -106,23 +106,28 @@ function parseTime(override = null) {
 	//Else, if minute is only 1 character, add a '0' in front of it.
 	else if (minute.length == 1) minute = '0' + minute;
 
-
-	/*----------------------- Saving to local storage ------------------------*/
-	//Allows data to be accessed even after refresh.
-	localStorage.setItem("hour", hour);
-	localStorage.setItem("minute", minute);
-	localStorage.setItem("meridiem", meridiem);
-
 	//Translates BOOLEAN
 	let ampm = "AM";
 	if (meridiem == true) ampm = "AM"; else ampm = "PM";
 
 	timeString = hour + ':' + minute + ampm;
-	localStorage.setItem("time", timeString);
 
-	document.getElementById("time-input").value = timeString;
+	if (override == null) {
+		document.getElementById("time-input").value = timeString;
+		saveLocally(hour, minute, meridiem, ampm);
+	}
 
-	console.log("Saved in local storage...\n\nHour: " + hour + "\nMinute: " + minute + "\nMeridiem: " + meridiem + "\n\nDisplay: " + timeString);
+	else return timeString;
+}
+
+//Allows data to be accessed even after refresh.
+function saveLocally(hr, min, mer, ampm) {
+	console.log("Saved in local storage...\n\nHour: " + hr + "\nMinute: " + min + "\nMeridiem: " + mer + "\n\nDisplay: " + hr + ':' + min + ampm);
+
+	localStorage.setItem("hour", hr);
+	localStorage.setItem("minute", min);
+	localStorage.setItem("meridiem", mer);
+	localStorage.setItem("time", hr + ':' + min + ampm);
 }
 
 //Activates on button click.
