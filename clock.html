@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html onclick="bootAlarm()">
 
 	<link href="clock.css" rel="stylesheet">
+	<script src="system.js"></script>
 
 	<body id="main" onload="onLoad('clock')">
-
-		<script src="system.js"></script>
 
 		<div id="sub1">
 
@@ -25,7 +24,6 @@
 						<div class="buffer42"></div>
 						<div class="button" id="button2" onclick="cancelAlarm()">
 							Cancel
-							<script src="system.js"></script>
 						</div>
 					</div>
 
@@ -34,5 +32,6 @@
 			</div>
 
 		</div>
+		<audio id="annoying-sound" src="RANGGYU.mp3"></audio>
 	</body>
 </html>
