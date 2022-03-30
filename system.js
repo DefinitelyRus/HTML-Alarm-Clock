@@ -24,17 +24,25 @@ function onLoad(pageName) {
 	}
 }
 
-function parseTime() {
+//Activates after losing focus or clicking ENTER while on time-input.
+function parseTime(override = null) {
+
 	//Declaration & Initialization
 	let timeString = "12:00AM";
 	let hour = "12", minute = "00";
 	let meridiem = true; //true = AM, false = PM
 	let tempTimeString = "";
 	let hourSwitch = true; //true = hour, false = minute.
-	timeString = document.getElementById("time-input").value;
 	hour = "", minute = "";
 
-	console.log("Input: " + timeString);
+	//If override is null, set timeString to time-input's value.
+	if (override == null) timeString = document.getElementById("time-input").value;
+
+	//Else, set timeString to equal override.
+	else timeString = override;
+
+	console.log("Parsing " + timeString + "...");
+
 
 	/*---------------------------- Setting values ----------------------------*/
 	//For every chacter of timeString
