@@ -46,7 +46,7 @@ function parseTime(override = null) {
 
 	/*---------------------------- Setting values ----------------------------*/
 	//For every chacter of timeString
-	for (const char of timeString) {
+	for (const char of timeString.toUpperCase()) {
 
 		//If char is ':' (colon), set hourSwitch to FALSE.
 		if (char == ':' || hour.length == 2) hourSwitch = false;
@@ -113,6 +113,7 @@ function parseTime(override = null) {
 	localStorage.setItem("minute", minute);
 	localStorage.setItem("meridiem", meridiem);
 
+	//Translates BOOLEAN
 	let ampm = "AM";
 	if (meridiem == true) ampm = "AM"; else ampm = "PM";
 
