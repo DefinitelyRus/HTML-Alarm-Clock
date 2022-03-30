@@ -27,13 +27,13 @@
 					<div class="sub4" id="sub4">
 
 						<!-- Time input -->
-						<input id="time-input" onfocusout="parseTime()" maxlength="7" placeholder="12:00AM">
+						<input id="time-input" onfocusout="parseTime()" maxlength="7" placeholder="12:00AM" onclick="updateClock(true)">
 						</input>
 
 						<div class="buffer32"></div>
 
 						<!-- Start button -->
-						<div id="start-button" onclick="startAlarm()">Start</div>
+						<div id="start-button" onclick="launchAlarm()">Start</div>
 
 						<!-- Hidden button; activates on ENTER. -->
 						<div id="hidden-button" hidden onclick="parseTime()">
