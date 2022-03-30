@@ -187,7 +187,7 @@ function cancelAlarm() {
 	window.history.back();
 }
 
-function updateClock(quickStart = false) {
+function updateClock() {
 	let date = new Date();
 	let hh = date.getHours();
 	let mm = date.getMinutes();
@@ -199,12 +199,7 @@ function updateClock(quickStart = false) {
 
 	time = parseTime(time);
 
-	if (quickStart) {
-		let input = document.getElementById("time-input");
-		input.value = time;
-		input.select();
-	}
-	else document.getElementById("timer").innerHTML = time;
+	document.getElementById("timer").innerHTML = time;
 
 	return time;
 }
