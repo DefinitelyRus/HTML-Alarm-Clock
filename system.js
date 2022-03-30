@@ -120,6 +120,56 @@ function startAlarm() {
 	window.location.href = "clock.html";
 }
 
+//Activates upon "clicking anywhere on screen".
+function bootAlarm() {
+	let hour = localStorage.getItem("hour");
+	let minute = localStorage.getItem("minute");
+	let meridiemBool = localStorage.getItem("meridiem");
+	let meridiem = "";
+	if (meridiemBool) meridiem = "AM"; else meridiem = "PM";
+
+	let b1 = document.getElementById("button1");
+
+	//Updates the alarm time display.
+	b1.innerHTML = hour + ':' + minute + meridiem;
+	b1.style.color = "#00968840";
+	b1.style.borderColor = "#343434ff";
+
+	//Updates the clock.
+	updateClock(); //Only because it's ugly without it.
+	document.getElementById("timer").style.fontSize = "17vw";
+
+	let time;
+
+	//Repeats every second:...
+	let interval = setInterval( function() {
+		time = updateClock();
+
+		//Activates when alarm reaches target.
+		//If current time is equal to target time...
+		if (time == localStorage.getItem("time")) {
+
+			let clock = document.getElementById("timer");
+			let button1 = document.getElementById("button1");
+			let button2 = document.getElementById("button2");
+			let audio = document.getElementById("annoying-sound")
+
+			//Change clock color.
+			clock.style.color = "#00ffffff";
+
+			//Changes left button looks & behavior.
+			button1.style.border = "8px solid #303030ff";
+			button1.style.color = "#ff00ffff";
+
+			//Changes button2 text.
+			button2.innerHTML = "Stop";
+
+			//Plays the "annoying audio".
+			audio.play();
+		}
+	}, 1000);
+}
+
 function cancelAlarm() {
 	window.history.back();
 }
