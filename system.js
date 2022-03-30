@@ -116,7 +116,8 @@ function parseTime() {
 	console.log("Saved in local storage...\n\nHour: " + hour + "\nMinute: " + minute + "\nMeridiem: " + meridiem + "\n\nDisplay: " + timeString);
 }
 
-function startAlarm() {
+//Activates on button click.
+function launchAlarm() {
 	window.location.href = "clock.html";
 }
 
