@@ -13,36 +13,14 @@ function onLoad(pageName) {
 	}
 
 	else if (pageName == "clock") {
-		let hour = localStorage.getItem("hour");
-		let minute = localStorage.getItem("minute");
-		let meridiemBool = localStorage.getItem("meridiem");
-		let meridiem = "";
+		let timer = document.getElementById("timer");
+		let button1 = document.getElementById("button1");
 
-		if (meridiemBool) meridiem = "AM"; else meridiem = "PM";
+		timer.innerHTML = "Click anywhere to activate alarm.";
 
-		document.getElementById("button1").innerHTML = hour + ':' + minute + meridiem;
-
-		updateClock();
-
-		let time;
-		let interval = setInterval(function() {
-			time = updateClock();
-
-			if (time == localStorage.getItem("time")) {
-
-				let clock = document.getElementById("timer");
-				let button1 = document.getElementById("button1");
-				let button2 = document.getElementById("button2");
-
-				clock.style.color = "#00ffffff";
-
-				button1.innerHTML = "Snooze";
-				button1.style.border = "8px solid #303030ff";
-				button1.style.background = "#303030ff"
-
-				window.clearInterval(interval);
-			}
-		}, 1000);
+		button1.innerHTML = localStorage.getItem("time");
+		button1.style.borderColor = "#adadad10";
+		button1.style.color = "#adadad10";
 	}
 }
 
