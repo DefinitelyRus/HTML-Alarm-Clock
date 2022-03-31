@@ -79,7 +79,6 @@ function parseTime(override = null) {
 
 
 	/*--------------------------- Filtering inputs ---------------------------*/
-
 	let intHour = parseInt(hour, 10);
 
 	//If hour is only 1 character, add a '0' in front of it.
@@ -101,12 +100,13 @@ function parseTime(override = null) {
 		if (hour.length == 1) hour = '0' + hour; //Add 0 if only 1 character.
 	}
 
-	//If minute is more than 2 characters OR its value is more than 59,
-	//set minute to "00".
-	if (minute.length < 2 || parseInt(minute, 10) > 59)  minute = "00";
+	//If minute is only 1 character, add a '0' in front of it.
+	if (minute.length == 1) minute = '0' + minute;
 
-	//Else, if minute is only 1 character, add a '0' in front of it.
-	else if (minute.length == 1) minute = '0' + minute;
+	//Else, if minute is more than 2 characters OR its value is more than 59,
+	//set minute to "00".
+	else if (minute.length < 2 || parseInt(minute, 10) > 59) minute = "00";
+
 
 	//Translates BOOLEAN
 	let ampm = "AM";
@@ -148,8 +148,7 @@ function bootAlarm() {
 	let minute = localStorage.getItem("minute");
 	let meridiemBool = localStorage.getItem("meridiem");
 	let meridiem = "";
-	if (meridiemBool) meridiem = "AM"; else meridiem = "PM";
-	console.log(meridiemBool);
+	if (meridiemBool == true) meridiem = "AM"; else meridiem = "PM";
 
 	let b1 = document.getElementById("button1");
 
