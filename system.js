@@ -147,12 +147,13 @@ function launchAlarm() {
 
 //Activates upon "clicking anywhere on screen".
 function bootAlarm() {
-	let b1 = document.getElementById("button1");
 	let hour = localStorage.getItem("hour");
 	let minute = localStorage.getItem("minute");
 	let meridiemBool = localStorage.getItem("meridiem");
-	let meridiem, time;
+	let meridiem = "";
 	if (meridiemBool) meridiem = "AM"; else meridiem = "PM";
+
+	let b1 = document.getElementById("button1");
 
 	//Updates the alarm time display.
 	b1.innerHTML = hour + ':' + minute + meridiem;
@@ -163,6 +164,7 @@ function bootAlarm() {
 	updateClock(); //Only because it's ugly without it.
 	document.getElementById("timer").style.fontSize = "17vw";
 
+	let time;
 
 	//Repeats every second:...
 	let interval = setInterval( function() {
