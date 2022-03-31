@@ -1,5 +1,7 @@
+//Activaes on page load.
 function onLoad(pageName) {
 
+	//If the pageName is "home"...
 	if (pageName == "home") {
 		const input = document.getElementById("time-input");
 
@@ -12,12 +14,15 @@ function onLoad(pageName) {
 		});
 	}
 
+	//Else, if the pageName is "clock"...
 	else if (pageName == "clock") {
 		let timer = document.getElementById("timer");
 		let button1 = document.getElementById("button1");
 
+		//Set the clock's text to...
 		timer.innerHTML = "Click anywhere to activate alarm.";
 
+		//Apply value and style changes.
 		button1.innerHTML = localStorage.getItem("time");
 		button1.style.borderColor = "#adadad10";
 		button1.style.color = "#adadad10";
@@ -41,11 +46,9 @@ function parseTime(override = null) {
 	//Else, set timeString to equal override.
 	else timeString = override;
 
-	console.log("Parsing " + timeString + "...");
-
 
 	/*---------------------------- Setting values ----------------------------*/
-	//For every chacter of timeString
+	//For every chacter of timeString...
 	for (const char of timeString.toUpperCase()) {
 
 		//If char is ':' (colon), set hourSwitch to FALSE.
@@ -76,7 +79,6 @@ function parseTime(override = null) {
 
 
 	/*--------------------------- Filtering inputs ---------------------------*/
-	console.log("Checking inputs...")
 
 	let intHour = parseInt(hour, 10);
 
@@ -110,10 +112,15 @@ function parseTime(override = null) {
 	let ampm = "AM";
 	if (meridiem == true) ampm = "AM"; else ampm = "PM";
 
+	//Combines into one STRING.
 	timeString = hour + ':' + minute + ampm;
 
+	//If there is no override...
 	if (override == null) {
+		//Change the time-input's value to timeString.
 		document.getElementById("time-input").value = timeString;
+
+		//Save to local storage.
 		saveLocally(hour, minute, meridiem, ampm);
 	}
 
@@ -132,7 +139,7 @@ function saveLocally(hr, min, mer, ampm) {
 
 //Activates on button click.
 function launchAlarm() {
-	window.location.href = "clock.html";
+	window.location.href = "clock.html"; //Redirects to clock.html
 }
 
 //Activates upon "clicking anywhere on screen".
@@ -142,6 +149,7 @@ function bootAlarm() {
 	let meridiemBool = localStorage.getItem("meridiem");
 	let meridiem = "";
 	if (meridiemBool) meridiem = "AM"; else meridiem = "PM";
+	console.log(meridiemBool);
 
 	let b1 = document.getElementById("button1");
 
@@ -185,23 +193,30 @@ function bootAlarm() {
 	}, 1000);
 }
 
+//Activates upon clicking "Cancel" or "Stop".
 function cancelAlarm() {
-	window.history.back();
+	window.history.back(); //Goes back 1 page in history.
 }
 
+//Changes the clock's value based on current time.
 function updateClock() {
 	let date = new Date();
 	let hh = date.getHours();
 	let mm = date.getMinutes();
 	let md = "AM";
 
+	//Determines the use of post-meridiem.
 	if (hh > 12) { hh -= 12; md = "PM"; }
 
+	//String formatting: "HH:MM(MD)"
 	let time = hh.toString() + ':' + mm.toString() + md;
 
+	//Cleans the input.
 	time = parseTime(time);
 
+	//Applies changes.
 	document.getElementById("timer").innerHTML = time;
 
+	//Returns the formatted time.
 	return time;
 }
